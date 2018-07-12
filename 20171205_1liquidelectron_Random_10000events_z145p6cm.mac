@@ -1,0 +1,42 @@
+# These commands output the tracking information of every simulated particle in the log file.
+/run/verbose 0
+/control/verbose 0
+/tracking/verbose 0
+/grdm/verbose 0
+/process/verbose 0
+
+
+# This initializes the simulation 
+/run/initialize
+
+# Always identify the primary particles in each simulation, even if the sim doesn't record data
+/Bacc/io/alwaysRecordPrimary true
+
+# How often the simulation updates what event number it is on. Basically a progress bar in the log file.  
+/Bacc/io/updateFrequency 10
+
+# Directory where the output bin file is stored. A random seed # is appended to the output name.						
+/Bacc/io/outputDir /home/christina/LZSim/bin_files
+/Bacc/io/outputName 20171205_1liquidelectron_Random_10000events_z145p6cm_
+
+
+/Bacc/detector/select LZDetector
+# /LZ/gridWires off
+# /LZ/topGrid on
+/Bacc/detector/update
+
+/Bacc/detector/recordLevelOptPhot PMT_Photocathode 1
+
+/gps/particle thermalelectron
+/gps/number 1
+/gps/ene/mono 1e-6 eV
+/gps/direction 0 0 1
+/gps/pos/shape Circle
+/gps/pos/centre 0 0 145.6 cm
+/gps/pos/radius 700 mm
+
+/Bacc/physicsList/useOpticalProcesses true
+
+/Bacc/beamOn 10000
+
+exit
